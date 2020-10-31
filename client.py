@@ -20,18 +20,9 @@ class Client:
         self.UDP_SEND_PORT = 20011
 
         self.sock_receive = socket.socket(socket.AF_INET, # Internet
-                     socket.SOCK_DGRAM, socket.IPPROTO_UDP) # UDP
+                     socket.SOCK_DGRAM) # UDP
         
-        #addsa
-        self.sock_receive.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEPORT, 1)
         self.sock_receive.bind((self.UDP_IP, self.UDP_RECEIVE_PORT))
-        self.sock_receive.setsockopt(socket.IPPROTO_IP, socket.IP_MULTICAST_TTL, 255)
-        self.sock_receive.setsockopt(socket.IPPROTO_IP, socket.IP_ADD_MEMBERSHIP,
-            socket.inet_aton(self.UDP_RECEIVE_PORT) + socket.inet_aton(self.UDP_IP))
-
-        
-        
-        #self.sock_receive.bind((self.UDP_IP, self.UDP_RECEIVE_PORT))
 
         self.sock_send = socket.socket(socket.AF_INET, # Internet
                      socket.SOCK_DGRAM) # UDP
